@@ -2,6 +2,10 @@
 
 These bots were created to manage an Instagram marketing group on Telegram and Slack.
 
+**Disclaimer:**
+Yes there's some API keys and Tokens still left over. 
+Those are expired and he accounts for those are dead so it's fine. 
+
 ### Version History
 
 **Version 3**
