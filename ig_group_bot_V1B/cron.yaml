@@ -1,0 +1,442 @@
+cron:
+- description: DROP NAMES
+  url: /auto_start
+  schedule: everyday 02:30
+  timezone: America/New_York
+- description: TEN MINUTES
+  url: /auto_keepdropping
+  schedule: everyday 02:50
+  timezone: America/New_York
+- description: PRINT LIST
+  url: /auto_list
+  schedule: everyday 03:00
+  timezone: America/New_York
+- description: LEECH CHECK
+  url: /auto_leech
+  schedule: everyday 03:10
+  timezone: America/New_York
+- description: LEECH CHECK
+  url: /auto_leech
+  schedule: everyday 03:20
+  timezone: America/New_York
+- description: Check leech
+  url: /auto_leech
+  schedule: everyday 03:40
+  timezone: America/New_York 
+- description: Check leech
+  url: /auto_leech
+  schedule: everyday 04:00
+  timezone: America/New_York 
+- description: Check leech
+  url: /auto_leech
+  schedule: everyday 04:20
+  timezone: America/New_York    
+- description: END
+  url: /auto_end
+  schedule: everyday 04:30
+  timezone: America/New_York   
+- description: END
+  url: /auto_late
+  schedule: everyday 04:49
+  timezone: America/New_York 
+
+
+
+
+
+- description: DROP NAMES
+  url: /auto_start
+  schedule: everyday 05:30
+  timezone: America/New_York
+- description: TEN MINUTES
+  url: /auto_keepdropping
+  schedule: everyday 05:50
+  timezone: America/New_York
+- description: PRINT LIST
+  url: /auto_list
+  schedule: everyday 06:00
+  timezone: America/New_York
+- description: LEECH CHECK
+  url: /auto_leech
+  schedule: everyday 06:10
+  timezone: America/New_York
+- description: LEECH CHECK
+  url: /auto_leech
+  schedule: everyday 06:20
+  timezone: America/New_York
+- description: Check leech
+  url: /auto_leech
+  schedule: everyday 06:40
+  timezone: America/New_York 
+- description: Check leech
+  url: /auto_leech
+  schedule: everyday 07:00
+  timezone: America/New_York 
+- description: Check leech
+  url: /auto_leech
+  schedule: everyday 07:20
+  timezone: America/New_York    
+- description: END
+  url: /auto_end
+  schedule: everyday 07:30
+  timezone: America/New_York          
+- description: END
+  url: /auto_late
+  schedule: everyday 07:49
+  timezone: America/New_York 
+
+
+
+
+
+- description: DROP NAMES
+  url: /auto_start
+  schedule: everyday 08:30
+  timezone: America/New_York
+- description: TEN MINUTES
+  url: /auto_keepdropping
+  schedule: everyday 08:50
+  timezone: America/New_York
+- description: PRINT LIST
+  url: /auto_list
+  schedule: everyday 09:00
+  timezone: America/New_York
+- description: LEECH CHECK
+  url: /auto_leech
+  schedule: everyday 09:10
+  timezone: America/New_York
+- description: LEECH CHECK
+  url: /auto_leech
+  schedule: everyday 09:20
+  timezone: America/New_York
+- description: Check leech
+  url: /auto_leech
+  schedule: everyday 09:40
+  timezone: America/New_York 
+- description: Check leech
+  url: /auto_leech
+  schedule: everyday 10:00
+  timezone: America/New_York 
+- description: Check leech
+  url: /auto_leech
+  schedule: everyday 10:20
+  timezone: America/New_York    
+- description: END
+  url: /auto_end
+  schedule: everyday 10:30
+  timezone: America/New_York      
+- description: END
+  url: /auto_late
+  schedule: everyday 10:49
+  timezone: America/New_York 
+
+
+
+
+
+- description: DROP NAMES
+  url: /auto_start
+  schedule: everyday 11:30
+  timezone: America/New_York
+- description: TEN MINUTES
+  url: /auto_keepdropping
+  schedule: everyday 11:50
+  timezone: America/New_York
+- description: PRINT LIST
+  url: /auto_list
+  schedule: everyday 12:00
+  timezone: America/New_York
+- description: LEECH CHECK
+  url: /auto_leech
+  schedule: everyday 12:10
+  timezone: America/New_York
+- description: LEECH CHECK
+  url: /auto_leech
+  schedule: everyday 12:20
+  timezone: America/New_York
+- description: Check leech
+  url: /auto_leech
+  schedule: everyday 12:40
+  timezone: America/New_York 
+- description: Check leech
+  url: /auto_leech
+  schedule: everyday 13:00
+  timezone: America/New_York 
+- description: Check leech
+  url: /auto_leech
+  schedule: everyday 13:20
+  timezone: America/New_York    
+- description: END
+  url: /auto_end
+  schedule: everyday 13:30
+  timezone: America/New_York    
+- description: END
+  url: /auto_late
+  schedule: everyday 13:49
+  timezone: America/New_York      
+
+
+
+
+
+- description: DROP NAMES
+  url: /auto_start
+  schedule: everyday 14:30
+  timezone: America/New_York
+- description: TEN MINUTES
+  url: /auto_keepdropping
+  schedule: everyday 14:50
+  timezone: America/New_York
+- description: PRINT LIST
+  url: /auto_list
+  schedule: everyday 15:00
+  timezone: America/New_York
+- description: LEECH CHECK
+  url: /auto_leech
+  schedule: everyday 15:30
+  timezone: America/New_York
+- description: Check leech
+  url: /auto_leech
+  schedule: everyday 15:45
+  timezone: America/New_York 
+- description: Check leech
+  url: /auto_leech
+  schedule: everyday 16:00
+  timezone: America/New_York 
+- description: Check leech
+  url: /auto_leech
+  schedule: everyday 16:20
+  timezone: America/New_York 
+- description: Check leech
+  url: /auto_leech
+  schedule: everyday 16:40
+  timezone: America/New_York    
+- description: END
+  url: /auto_end
+  schedule: everyday 17:00
+  timezone: America/New_York    
+- description: END
+  url: /auto_late
+  schedule: everyday 17:19
+  timezone: America/New_York 
+
+- description: clearlist
+  url: /auto_clearlist
+  schedule: everyday 17:01
+  timezone: America/New_York 
+- description: clearlist
+  url: /auto_clearlist
+  schedule: everyday 11:01
+  timezone: America/New_York 
+- description: clearlist
+  url: /auto_clearlist
+  schedule: everyday 19:31
+  timezone: America/New_York            
+- description: clearlist
+  url: /auto_clearlist
+  schedule: everyday 04:31
+  timezone: America/New_York  
+- description: clearlist
+  url: /auto_clearlist
+  schedule: everyday 23:58
+  timezone: America/New_York   
+
+
+
+
+- description: DROP NAMES
+  url: /auto_start
+  schedule: everyday 17:30
+  timezone: America/New_York
+- description: TEN MINUTES
+  url: /auto_keepdropping
+  schedule: everyday 17:50
+  timezone: America/New_York
+- description: PRINT LIST
+  url: /auto_list
+  schedule: everyday 18:00
+  timezone: America/New_York
+- description: LEECH CHECK
+  url: /auto_leech
+  schedule: everyday 18:10
+  timezone: America/New_York
+- description: LEECH CHECK
+  url: /auto_leech
+  schedule: everyday 18:20
+  timezone: America/New_York
+- description: Check leech
+  url: /auto_leech
+  schedule: everyday 18:40
+  timezone: America/New_York 
+- description: Check leech
+  url: /auto_leech
+  schedule: everyday 19:00
+  timezone: America/New_York 
+- description: Check leech
+  url: /auto_leech
+  schedule: everyday 19:20
+  timezone: America/New_York 
+- description: END
+  url: /auto_end
+  schedule: everyday 19:30
+  timezone: America/New_York    
+- description: END
+  url: /auto_late
+  schedule: everyday 19:49
+  timezone: America/New_York 
+
+
+
+
+
+
+- description: DROP NAMES
+  url: /auto_start
+  schedule: everyday 20:30
+  timezone: America/New_York
+- description: TEN MINUTES
+  url: /auto_keepdropping
+  schedule: everyday 20:50
+  timezone: America/New_York
+- description: PRINT LIST
+  url: /auto_list
+  schedule: everyday 21:00
+  timezone: America/New_York
+- description: LEECH CHECK
+  url: /auto_leech
+  schedule: everyday 21:10
+  timezone: America/New_York
+- description: LEECH CHECK
+  url: /auto_leech
+  schedule: everyday 21:20
+  timezone: America/New_York
+- description: Check leech
+  url: /auto_leech
+  schedule: everyday 21:40
+  timezone: America/New_York 
+- description: Check leech
+  url: /auto_leech
+  schedule: everyday 22:00
+  timezone: America/New_York 
+- description: Check leech
+  url: /auto_leech
+  schedule: everyday 22:20
+  timezone: America/New_York 
+- description: END
+  url: /auto_end
+  schedule: everyday 22:30
+  timezone: America/New_York 
+- description: END
+  url: /auto_late
+  schedule: everyday 22:49
+  timezone: America/New_York 
+
+
+
+
+
+- description: DROP NAMES
+  url: /auto_start
+  schedule: everyday 23:30
+  timezone: America/New_York
+- description: TEN MINUTES
+  url: /auto_keepdropping
+  schedule: everyday 23:50
+  timezone: America/New_York
+- description: PRINT LIST
+  url: /auto_list
+  schedule: everyday 00:00
+  timezone: America/New_York
+- description: LEECH CHECK
+  url: /auto_leech
+  schedule: everyday 00:10
+  timezone: America/New_York
+- description: LEECH CHECK
+  url: /auto_leech
+  schedule: everyday 00:20
+  timezone: America/New_York
+- description: Check leech
+  url: /auto_leech
+  schedule: everyday 00:40
+  timezone: America/New_York 
+- description: Check leech
+  url: /auto_leech
+  schedule: everyday 01:00
+  timezone: America/New_York 
+- description: Check leech
+  url: /auto_leech
+  schedule: everyday 01:20
+  timezone: America/New_York 
+- description: END
+  url: /auto_end
+  schedule: everyday 01:30
+  timezone: America/New_York 
+- description: END
+  url: /auto_late
+  schedule: everyday 01:49
+  timezone: America/New_York 
+
+- description: Starts a Round
+  url: /auto_forty
+  schedule: everyday 02:00
+  timezone: America/New_York
+- description: Starts a Round
+  url: /auto_forty  
+  schedule: everyday 05:00
+  timezone: America/New_York
+- description: Starts a Round
+  url: /auto_forty
+  schedule: everyday 08:00
+  timezone: America/New_York
+- description: Starts a Round
+  url: /auto_forty 
+  schedule: everyday 11:00
+  timezone: America/New_York
+- description: Starts a Round
+  url: /auto_forty  
+  schedule: everyday 14:00
+  timezone: America/New_York
+- description: Starts a Round
+  url: /auto_forty  
+  schedule: everyday 17:02
+  timezone: America/New_York
+- description: Starts a Round
+  url: /auto_forty  
+  schedule: everyday 20:00
+  timezone: America/New_York
+- description: Starts a Round
+  url: /auto_forty  
+  schedule: everyday 23:00   
+
+- description: Starts a Round
+  url: /auto_onehour
+  schedule: everyday 02:20
+  timezone: America/New_York
+- description: Starts a Round
+  url: /auto_onehour 
+  schedule: everyday 05:20
+  timezone: America/New_York
+- description: Starts a Round
+  url: /auto_onehour
+  schedule: everyday 08:20
+  timezone: America/New_York
+- description: Starts a Round
+  url: /auto_onehour 
+  schedule: everyday 11:20
+  timezone: America/New_York
+- description: Starts a Round
+  url: /auto_onehour 
+  schedule: everyday 14:20
+  timezone: America/New_York
+- description: Starts a Round
+  url: /auto_onehour 
+  schedule: everyday 17:20
+  timezone: America/New_York
+- description: Starts a Round
+  url: /auto_onehour
+  schedule: everyday 20:20
+  timezone: America/New_York
+- description: Starts a Round
+  url: /auto_onehour 
+  schedule: everyday 23:20  
+  timezone: America/New_York  

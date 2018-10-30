@@ -1,0 +1,43 @@
+application: destroyer-148721
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+- url: /favicon\.ico
+  static_files: favicon.ico
+  upload: favicon\.ico
+
+- url: /set_webhook
+  script: main.app
+
+- url: /auto_clearbl
+  script: main.app
+
+- url: /auto_onehour
+  script: main.app  
+
+- url: /auto_forty
+  script: main.app    
+
+- url: /auto_start
+  script: main.app   
+
+- url: /auto_list
+  script: main.app 
+
+- url: /auto_leech
+  script: main.app
+
+- url: /auto_end
+  script: main.app 
+
+- url: .*
+  script: main.app
+
+libraries:
+- name: webapp2
+  version: "2.5.2"
+- name: PIL
+  version: latest

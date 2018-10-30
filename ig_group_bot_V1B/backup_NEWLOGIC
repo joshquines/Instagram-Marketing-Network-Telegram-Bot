@@ -1,0 +1,887 @@
+import StringIO
+import json
+import logging
+import random
+import urllib
+import urllib2
+from auto_start import *
+from auto_leech import *
+from auto_list import *
+from auto_h import *
+from auto_hlist import *
+from collections import defaultdict
+
+# for sending images
+from PIL import Image
+import multipart
+
+# standard app engine imports
+from google.appengine.api import urlfetch
+from google.appengine.ext import ndb
+import webapp2
+
+TOKEN = '270598300:AAEx-4WjC6IJ0_eTGW7iAwdMNEgP8PUhGEo'
+
+BASE_URL = 'https://api.telegram.org/bot' + TOKEN + '/'
+
+admins = ['TheQuot3s','Ganesha27','gainsforlife']
+black_leech = []
+mainlist = []
+list1 = []
+donelist = []
+leechlist = []
+fromlist = []
+telelist = []
+blacklist = ['@fun.look','@bestearth.travel','@hustlerluxury','@theluxuryhustler','@bapeme_','@michele_photography','@attonmiami','@styligram_', '@luxurytraveldiva','@the.lux.goals','@lovemadeleines','@exclusivecars','@realwilliewills','@ryanmagdanz','@zintnutrition']
+chatList = ['-1001082178741','-1001081667369']
+herelist = []
+otherlist = []
+fllist = []
+mplist = []
+leera = []
+userdrop = True
+x = 0
+excl =  u"\u203C"
+
+def bot_talk(msg=None, img=None):
+    if msg:
+        for p in chatList:
+            chat_id = p 
+            resp = urllib2.urlopen(BASE_URL + 'sendMessage', urllib.urlencode({
+                'chat_id': str(chat_id),
+                'text': msg.encode('utf-8'),
+                'disable_web_page_preview': 'true',
+                #'reply_to_message_id': str(message_id),
+            })).read()
+
+
+
+
+
+
+
+# ================================
+
+class EnableStatus(ndb.Model):
+    # key name: str(chat_id)
+    enabled = ndb.BooleanProperty(indexed=False, default=False)
+
+
+# ================================
+
+def setEnabled(chat_id, yes):
+    es = EnableStatus.get_or_insert(str(chat_id))
+    es.enabled = yes
+    es.put()
+
+def getEnabled(chat_id):
+    es = EnableStatus.get_by_id(str(chat_id))
+    if es:
+        return es.enabled
+    return False
+
+
+# ================================
+
+class MeHandler(webapp2.RequestHandler):
+    def get(self):
+        urlfetch.set_default_fetch_deadline(60)
+        self.response.write(json.dumps(json.load(urllib2.urlopen(BASE_URL + 'getMe'))))
+
+
+class GetUpdatesHandler(webapp2.RequestHandler):
+    def get(self):
+        urlfetch.set_default_fetch_deadline(60)
+        self.response.write(json.dumps(json.load(urllib2.urlopen(BASE_URL + 'getUpdates'))))
+
+class SetWebhookHandler(webapp2.RequestHandler):
+    def get(self):
+        urlfetch.set_default_fetch_deadline(60)
+        url = self.request.get('url')
+        if url:
+            self.response.write(json.dumps(json.load(urllib2.urlopen(BASE_URL + 'setWebhook', urllib.urlencode({'url': url})))))
+
+#==================================================================================================================================================
+
+class autolist(webapp2.RequestHandler):
+    def get(self):
+        urlfetch.set_default_fetch_deadline(60)
+        chat_id = '-1001082178741'
+        def reply2(msg=None, img=None):
+            if msg:
+                resp = urllib2.urlopen(BASE_URL + 'sendMessage', urllib.urlencode({
+                    'chat_id': str(chat_id),
+                    'text': msg.encode('utf-8'),
+                    #'disable_web_page_preview': 'true',
+                    #'reply_to_message_id': str(message_id),
+                })).read() 
+    #FL LIST
+        ul = len(usernames)
+        while ul > 0:
+            usernames.pop()
+            ul -= 1
+        a = len(fllist)
+        count = 0
+        b = 1
+        total = a/200 + 1
+        if a % 200 == 0:
+            total == a/200
+        opo = str(total)
+        for p in fllist:
+            k = fllist[count]
+            usernames.append(k)
+            ul = len(usernames)
+            count += 1 
+            if ul == 201:
+                listit = "\n".join(usernames)
+                num = str(b)
+                reply2('F L - L I S T [' + num + '/' + opo + ']\n' + listit)
+                #time.sleep (50.0 / 1000.0)
+                b += 1
+                while ul > 0:
+                    usernames.pop()
+                    ul -= 1
+        listit = "\n".join(usernames)
+        num = str(b)
+        if listit:
+            reply2('F L - L I S T [' + num + '/' + opo + ']\n' + listit)
+        #time.sleep (100.0 / 1000.0)
+
+        #MP LIST
+        ul = len(usernames)
+        while ul > 0:
+            usernames.pop()
+            ul -= 1
+        a = len(mplist)
+        count = 0
+        b = 1
+        total = a/200 + 1
+        if a % 200 == 0:
+            total == a/200
+        opo = str(total)
+        for p in mplist:
+            k = mplist[count]
+            usernames.append(k)
+            ul = len(usernames)
+            count += 1 
+            if ul == 200:
+                listit = "\n".join(usernames)
+                num = str(b)
+                reply2('M P - L I S T [' + num + '/' + opo + ']\n' + listit)
+                #time.sleep (50.0 / 1000.0)
+                b += 1
+                while ul > 0:
+                    usernames.pop()
+                    ul -= 1
+        listit = "\n".join(usernames)
+        num = str(b)
+        if listit:
+            reply2('M P - L I S T [' + num + '/' + opo + ']\n' + listit)
+        #time.sleep (50.0 / 1000.0)
+
+        #S P L I T LIST
+        ul = len(usernames)
+        while ul > 0:
+            usernames.pop()
+            ul -= 1
+        a = len(list1)
+        count = 0
+        b = 1
+        total = a/17 + 1
+        if a % 17 == 0:
+            total == a/17
+        opo = str(total)
+        for p in list1:
+            k = list1[count]
+            usernames.append(k)
+            ul = len(usernames)
+            count += 1 
+            if ul == 17:
+                listit = "\n".join(usernames)
+                num = str(b)
+                reply2('S P L I T - L I S T [' + num + '/' + opo + ']\n' + listit)
+                #time.sleep (50.0 / 1000.0)
+                b += 1
+                while ul > 0:
+                    usernames.pop()
+                    ul -= 1
+        listit = "\n".join(usernames)
+        num = str(b)
+        if listit:
+            reply2('S P L I T - L I S T [' + num + '/' + opo + ']\n' + listit)
+        #time.sleep (50.0 / 1000.0)
+        reply2('D @username when done.\nLike latest photo from ALL lists \n*FL List only if you use FL\nMP List only if you use MP\n*All Split Lists if manual*\n\n*****\nIf you engaged with a different account, D @droppedIG then reply2 to that post with \'engaged with @engagedIG\'\n\nYou have 1.5 hours to engage')
+        global userdrop
+        userdrop = False
+
+#==================================================================================================================================================
+
+class clearbl(webapp2.RequestHandler):
+    def get(self):
+        for p in blacklist:
+            blacklist.pop()
+        for p in chatList:
+            chat_id = p 
+            def reply123(msg=None, img=None):
+                if msg:
+                    resp = urllib2.urlopen(BASE_URL + 'sendMessage', urllib.urlencode({
+                        'chat_id': str(chat_id),
+                        'text': msg.encode('utf-8'),
+                        #'disable_web_page_preview': 'true',
+                        #'reply_to_message_id': str(message_id),
+        })).read()        
+            reply123('Blacklist Cleared')        
+
+class end(webapp2.RequestHandler):
+    global userdrop
+    userdrop = False    
+    def get(self):
+        for p in chatList:
+            chat_id = p
+            def reply8(msg=None, img=None):
+                if msg:
+                    resp = urllib2.urlopen(BASE_URL + 'sendMessage', urllib.urlencode({
+                        'chat_id': str(chat_id),
+                        'text': msg.encode('utf-8'),
+                        #'disable_web_page_preview': 'true',
+                        #'reply_to_message_id': str(message_id),
+        })).read()
+            p = len(mainlist)
+            if p > 0:
+                reply8(excl + ' Round has ended. If you haven\'t finished by now, you may be blacklisted.\n\n**Next round is in 1 hour\n\nINVITE MORE PEOPLE!\nInvite link: \nhttps://telegram.me/joinchat/ES2a4j-YetA34D19PBU42Q\n\nMARKETPLACE: \nTelegram.me/instagainsmarket\nDISCUSSION: \nhttps://telegram.me/joinchat/ES2a4j8lNrcO0QCqDuP23Q')
+            else:
+                reply8(excl + ' Round has ended with no leechers!\n\n**Next round is in 1 hour\n\nINVITE MORE PEOPLE!\nInvite link: \nhttps://telegram.me/joinchat/ES2a4j-YetA34D19PBU42Q\n\nMARKETPLACE: \nTelegram.me/instagainsmarket\nDISCUSSION: \nhttps://telegram.me/joinchat/ES2a4j8lNrcO0QCqDuP23Q')
+
+
+class onehour(webapp2.RequestHandler):
+    def get(self):
+        for p in chatList:
+            chat_id = p
+            def reply10(msg=None, img=None):
+                if msg:
+                    resp = urllib2.urlopen(BASE_URL + 'sendMessage', urllib.urlencode({
+                        'chat_id': str(chat_id),
+                        'text': msg.encode('utf-8'),
+                        #'disable_web_page_preview': 'true',
+                        #'reply_to_message_id': str(message_id),
+        })).read()
+            reply10('NR in 10 minutes\nGet ready!\n\nLet people know a round is happening!\nInvite Link: https://telegram.me/joinchat/ES2a4j-YetA34D19PBU42Q')
+
+class forty(webapp2.RequestHandler):
+    def get(self):
+        for p in chatList:
+            chat_id = p
+            def reply9(msg=None, img=None):
+                if msg:
+                    resp = urllib2.urlopen(BASE_URL + 'sendMessage', urllib.urlencode({
+                        'chat_id': str(chat_id),
+                        'text': msg.encode('utf-8'),
+                        #'disable_web_page_preview': 'true',
+                        #'reply_to_message_id': str(message_id),
+        })).read()
+            reply9('*40 minutes till next round\nRound starts at :40\nGet ready!\n\nLet people know a round is about to happen!\nInvite Link: https://telegram.me/joinchat/ES2a4j-YetA34D19PBU42Q')
+
+class keepdropping(webapp2.RequestHandler):
+    global userdrop
+    userdrop = True      
+    def get(self):
+        for p in chatList:
+            chat_id = p
+            def reply101(msg=None, img=None):
+                if msg:
+                    resp = urllib2.urlopen(BASE_URL + 'sendMessage', urllib.urlencode({
+                        'chat_id': str(chat_id),
+                        'text': msg.encode('utf-8'),
+                        #'disable_web_page_preview': 'true',
+                        #'reply_to_message_id': str(message_id),
+        })).read()
+            reply101('KEEP DROPPING\nLET PEOPLE KNOW A DROP IS HAPPNING NOW\nInvite Link: https://telegram.me/joinchat/ES2a4j-YetA34D19PBU42Q')
+#==================================================================================================================================================
+htrue = []
+
+class autostart(webapp2.RequestHandler):
+    global userdrop
+    userdrop = True      
+    def get(self):
+        a = len(mainlist)
+        while a > 0:
+            mainlist.pop()
+            a -= 1
+        a = len(list1)
+        while a > 0:
+            list1.pop()
+            a -= 1
+        a = len(fllist)    
+        while a > 0:
+            fllist.pop()
+            a -= 1
+        a = len(fromlist)
+        while a > 0:
+            fromlist.pop()
+            a -= 1
+        a = len(mplist)    
+        while a > 0:
+            mplist.pop()
+            a -= 1 
+        list1.append('@instagain.s')
+        fllist.append('@instagain.s')
+        mplist.append('instagain.s')
+        list1.append('@thequot3s')
+        fllist.append('@thequot3s')
+        mplist.append('thequot3s')
+        list1.append('@zollarice')
+        fllist.append('@zollarice')
+        mplist.append('zollarice')
+        for p in chatList:
+            chat_id = p
+            def reply3(msg=None, img=None):
+                if msg:
+                    resp = urllib2.urlopen(BASE_URL + 'sendMessage', urllib.urlencode({
+                        'chat_id': str(chat_id),
+                        'text': msg.encode('utf-8'),
+                        #'disable_web_page_preview': 'true',
+                        #'reply_to_message_id': str(message_id),
+        })).read() 
+            global userdrop
+            userdrop = True        
+            reply3(excl + 'DROP DROP DROP DROP DROP\nRound Is Starting! Drop your @usernames now\nDo NOT add anything after @username\nList will drop in 20 minutes\n**If you can\'t make this round but you entered, just enter /remove @username')  
+
+#==================================================================================================================================================
+class leech(webapp2.RequestHandler):
+    def get(self):
+        global userdrop
+        userdrop = False     
+        for p in chatList:
+            chat_id = p
+            def reply4(msg=None, img=None):
+                if msg:
+                    resp = urllib2.urlopen(BASE_URL + 'sendMessage', urllib.urlencode({
+                        'chat_id': str(chat_id),
+                        'text': msg.encode('utf-8'),
+                        #'disable_web_page_preview': 'true',
+                        #'reply_to_message_id': str(message_id),
+        })).read()
+            p = len(mainlist)
+            if p > 0:
+                a = len(leera)
+                while a > 0:
+                    leera.pop()
+                    a -= 1
+                leechers = "\n".join(mainlist)
+                reply4('Still missing engagement from:\n' + leechers)
+                #reply(leechers)
+                #for n,g in zip(mainlist,fromlist):
+                #    leera.append('[' + n + 'by: ' + g + ']')
+                #gaaa =  "\n".join(leera) 
+                #reply4('Still missing engagement from:\n' + gaaa)
+                #reply4('Still missing engagement from:\n' + leechers)
+            else:
+                reply4('No Leechers!')
+
+
+class WebhookHandler(webapp2.RequestHandler):
+    def post(self):
+        #us_idr = defaultdict(list)
+        #chk = bool
+        #chk = False
+        #us_idr['username'] = 'null'
+        urlfetch.set_default_fetch_deadline(60)
+        body = json.loads(self.request.body)
+        logging.info('request body:')
+        logging.info(body)
+        #dataz = json.loads(body)
+        self.response.write(json.dumps(body))
+
+        
+
+        update_id = body['update_id']
+        try:
+            message = body['message']
+        except:
+            message = body['edited_message']
+        message_id = message.get('message_id')
+        #us_id = message['id']
+        date = message.get('date')
+        text = message.get('text')
+        us_idr = message.get('from')
+
+        if 'username' in us_idr:
+            us_id = us_idr['username']
+        #elif 'username' in message['from']:
+        #    us_id = us_idr['username']
+        else:
+            us_ie = us_idr['id']
+            us_id = str(us_ie)
+            #us_rd = str(us_rr)
+            #us_id = us_rd 
+
+        #try:
+        #    us_id = us_idr['username']
+        #if 'username' not in dataz:
+        #    us_id = us_idr['id']
+        #else:
+        #    us_id = us_idr['username']
+        
+        chat = message['chat']
+        chat_id = chat['id']
+        excl = u'uE252'
+
+        if not text:
+            logging.info('no text')
+            return
+        if chat_id not in chatList:
+            otherlist.append(chat_id)
+        def reply(msg=None, img=None):
+            if msg:
+                resp = urllib2.urlopen(BASE_URL + 'sendMessage', urllib.urlencode({
+                    'chat_id': str(chat_id),
+                    'text': msg.encode('utf-8'),
+                    #'disable_web_page_preview': 'true',
+                    #'reply_to_message_id': str(message_id),
+                })).read()
+            elif img:
+                resp = multipart.post_multipart(BASE_URL + 'sendPhoto', [
+                    ('chat_id', str(chat_id)),
+                    ('reply_to_message_id', str(message_id)),
+                ], [
+                    ('photo', 'image.jpg', img),
+                ])
+            else:
+                logging.error('no msg or img specified')
+                resp = None
+
+            logging.info('send response:')
+            logging.info(resp)
+        if text == ('/triggertest'):
+            reply('trigger test is working.')
+            reply('ROUND IS STARTING:\nEnter: \n    @lowercase for likes only\n@CAPITALS for likes and comments (4+ words) \nFor multiple usernames, enter them separately \nList will drop in around 20 minutes.')
+        if text.startswith('/'):
+            if text == '/start':
+                reply('Bot enabled')
+                setEnabled(chat_id, True)
+            elif text == '/stop':
+                reply('Bot disabled')
+                setEnabled(chat_id, False)
+            elif text == '/justdo':
+                reply('i really did shit')
+            elif text == '/!dontfuckingmanualstart':
+                global userdrop
+                userdrop = True      
+                def get(self):
+                    a = len(mainlist)
+                    while a > 0:
+                        mainlist.pop()
+                        a -= 1
+                    a = len(list1)
+                    while a > 0:
+                        list1.pop()
+                        a -= 1
+                    a = len(fllist)    
+                    while a > 0:
+                        fllist.pop()
+                        a -= 1
+                    a = len(fromlist)
+                    while a > 0:
+                        fromlist.pop()
+                        a -= 1
+                    a = len(mplist)    
+                    while a > 0:
+                        mplist.pop()
+                        a -= 1 
+                    a = len(leera)
+                    while a > 0:
+                        leera.pop();
+                        a -= 1
+                    list1.append('@instagain.s')
+                    fllist.append('@instagain.s')
+                    mplist.append('instagain.s')
+                    list1.append('@thequot3s')
+                    fllist.append('@thequot3s')
+                    mplist.append('thequot3s')
+                    reply(excl + 'DROP DROP DROP DROP DROP\nRound Is Starting! Drop your @usernames now\nDo NOT add anything after @username\nList will drop in 20 minutes\n**If you can\'t make this round but you entered, just enter /remove @username')  
+
+            elif text == "/listlist" and us_id in admins:
+                #FL LIST
+                ul = len(usernames)
+                while ul > 0:
+                    usernames.pop()
+                    ul -= 1
+                a = len(fllist)
+                count = 0
+                b = 1
+                total = a/200 + 1
+                if a % 200 == 0:
+                    total == a/200
+                opo = str(total)
+                for p in fllist:
+                    k = fllist[count]
+                    usernames.append(k)
+                    ul = len(usernames)
+                    count += 1 
+                    if ul == 201:
+                        listit = "\n".join(usernames)
+                        num = str(b)
+                        reply('F L - L I S T [' + num + '/' + opo + ']\n' + listit)
+                        #time.sleep (50.0 / 1000.0)
+                        b += 1
+                        while ul > 0:
+                            usernames.pop()
+                            ul -= 1
+                listit = "\n".join(usernames)
+                num = str(b)
+                if listit:
+                    reply('F L - L I S T [' + num + '/' + opo + ']\n' + listit)
+                #time.sleep (100.0 / 1000.0)
+
+                #MP LIST
+                ul = len(usernames)
+                while ul > 0:
+                    usernames.pop()
+                    ul -= 1
+                a = len(mplist)
+                count = 0
+                b = 1
+                total = a/200 + 1
+                if a % 200 == 0:
+                    total == a/200
+                opo = str(total)
+                for p in mplist:
+                    k = mplist[count]
+                    usernames.append(k)
+                    ul = len(usernames)
+                    count += 1 
+                    if ul == 200:
+                        listit = "\n".join(usernames)
+                        num = str(b)
+                        reply('M P - L I S T [' + num + '/' + opo + ']\n' + listit)
+                        #time.sleep (50.0 / 1000.0)
+                        b += 1
+                        while ul > 0:
+                            usernames.pop()
+                            ul -= 1
+                listit = "\n".join(usernames)
+                num = str(b)
+                if listit:
+                    reply('M P - L I S T [' + num + '/' + opo + ']\n' + listit)
+                #time.sleep (50.0 / 1000.0)
+
+                #S P L I T LIST
+                ul = len(usernames)
+                while ul > 0:
+                    usernames.pop()
+                    ul -= 1
+                a = len(list1)
+                count = 0
+                b = 1
+                total = a/17 + 1
+                if a % 17 == 0:
+                    total == a/17
+                opo = str(total)
+                for p in list1:
+                    k = list1[count]
+                    usernames.append(k)
+                    ul = len(usernames)
+                    count += 1 
+                    if ul == 17:
+                        listit = "\n".join(usernames)
+                        num = str(b)
+                        reply('S P L I T - L I S T [' + num + '/' + opo + ']\n' + listit)
+                        #time.sleep (50.0 / 1000.0)
+                        b += 1
+                        while ul > 0:
+                            usernames.pop()
+                            ul -= 1
+                listit = "\n".join(usernames)
+                num = str(b)
+                if listit:
+                    reply('S P L I T - L I S T [' + num + '/' + opo + ']\n' + listit)
+                #time.sleep (50.0 / 1000.0)
+                reply('D @username when done.\nLike latest photo from ALL lists \n*FL List only if you use FL\nMP List only if you use MP\n*All Split Lists if manual*\n\n*****\nIf you engaged with a different account, D @droppedIG then reply to that post with \'engaged with @engagedIG\'\n\nYou have 1.5 hours to engage')
+                global userdrop
+                userdrop = False
+            elif text.startswith('/done'):
+                donename = text[5:]
+                s = mainlist
+                if donename in s:
+                    mainlist.remove(donename)
+            elif text == '/!endcheck':
+                p = len(mainlist)
+                if p > 0:
+                    leechers = "\n".join(mainlist)
+                    #reply('Still missing engagement from:\n')
+                    #reply(leechers)
+                    a = len(leera)
+                    while a > 0:
+                        leera.pop()
+                        a -= 1
+                    for n,g in zip(mainlist,fromlist):
+                        leera.append('[' + n + ' by: ' + g + ']')
+                    gaaa =  "\n".join(leera) 
+                    reply('Still missing engagement from:\n' + gaaa)
+                else:
+                    reply('No Leechers!')
+            elif text == '/!manualcheck':
+                p = len(mainlist)
+                if p > 0:
+                    leechers = "\n".join(mainlist)
+                    reply('Still missing engagement from:\n' + leechers)
+                    #reply('Still missing engagement from:\n')
+                    #reply(leechers)
+                    #a = len(leera)
+                    #while a > 0:
+                    #    leera.pop()
+                    #    a -= 1
+                    #for n,g in zip(mainlist,fromlist):
+                    #    leera.append('[' + n + 'by: ' + g + ']')
+                    #gaaa =  "\n".join(leera) 
+                    #reply('Still missing engagement from:\n' + gaaa)
+                else:
+                    reply('No Leechers!')
+            elif text == '/clearblacklist':
+                p = len(blacklist)
+                while p > 0:
+                    blacklist.pop()
+                    p -= 1
+                reply('Blacklist cleared')
+            elif text == '/telecheck':
+                p = len(fromlist)
+                if p > 0:
+                    leecht = "\n".join(fromlist)
+                    reply('Still missing engagement from:\n')
+                    reply(leecht)
+                else:
+                    reply('No Leechers!')
+            elif text == '/showblacklist':
+                shobl = "\n".join(blacklist)
+                reply("BLACKLIST")
+                reply(shobl)
+            elif text == '/!end':
+                if us_id == 'gainsforlife':
+                    reply('Round has ended')
+            elif text == '/rules':
+                reply('*When the bot says drop, drop you @IGusername\n*Do not drop before bot tells you to\n*Do not drop after the bot drops the list\n **If you dropped your name but want to be removed from the list, say /remove @name\nThis is a like only group.\nD @username when you are done engaging the list.\n\n    **You will get a warn if you D wrong and potentially get added to the leechlist\n    **If you complain that you did not get comments, you will get a warn.')
+            elif text.startswith('/blacklist'):
+                blname = text[11:]
+                if blname not in blacklist:
+                    blacklist.append(blname)
+                    reply('Added to blacklist: ' + blname)
+                else:
+                    reply('Already in blacklist ' + blname)
+            elif text.startswith('/unblacklist'):
+                blname = text[13:]
+                if blname in blacklist:
+                    blacklist.remove(blname)
+                    reply('Removed from blacklist: ' + blname)
+                else:
+                    reply('Not in blacklist: ' + blname)
+            elif text.startswith('/remove'):
+                global userdrop
+                pla = text[8:]
+                removename = pla.lower()
+                if userdrop == True:
+                    srttt = str(us_id)
+                    tele = '@' + srttt
+                    qw = mainlist
+                    asdaf = text[9:]
+                    if removename in qw:
+                        mainlist.remove(removename)
+                        qww = fromlist
+                        if tele in qww:
+                            fromlist.remove(tele) 
+                        if removename in fllist:
+                            fllist.remove(removename)
+                        if asdaf in mplist:
+                            mplist.remove(asdaf)
+                        reply('Removed: ' + removename)
+                    else:
+                        reply('Name not on list')
+                    s = list1
+                    if removename in s:
+                        list1.remove(removename)   
+                else:
+                    reply('The round has already started. You must engage [' + removename + ']')
+
+        # CUSTOMIZE FROM HERE
+
+        elif text.startswith('@'):
+            global userdrop
+            pla = text.lower()
+            username = pla
+            if username == '@globevacations':
+                if username not in blacklist: 
+                    blacklist.append(username)
+            elif ' nc' in username:
+                reply('DO NOT PUT NC: ' + username)
+            elif ' rc' in username:
+                reply('DO NOT INCLUDE ANYTHING AFTER USERNAME: ' + username)
+            elif ' RC' in username:
+                reply('DO NOT INCLUDE ANYTHING AFTER USERNAME: ' + username)
+            elif ' NC' in username:
+                reply('DO NOT PUT NC :' + username)
+            elif '\n' in username:
+                srttt = str(us_id)
+                reply('ONLY ENTER ONE USERNAME AT A TIME: \n' + srttt)
+            elif username not in blacklist:
+                if userdrop == True:
+                    if username in mainlist:
+                        reply('Account already in list: ' + username)
+                    else:                   
+                        mpname = username[1:]
+                        mainlist.append(username)
+                        fllist.append(username)
+                        mplist.append(mpname)
+                        srttt = str(us_id)
+                        tele = '@' + srttt
+                        fromlist.append(tele)
+                        x = len(mainlist)
+                        if x == 14:
+                            list1.append('@joshquines')
+                            fllist.append('@joshquines')
+                            mplist.append('joshquines')
+                            list1.append(username + '\n')
+                        elif x == 19:
+                            list1.append('@auralapse')
+                            fllist.append('@auralapse')
+                            mplist.append('auralapse')
+                            list1.append(username + '\n')
+                        elif x == 22:
+                            list1.append('@dericiousgarage')
+                            fllist.append('@dericiousgarage')
+                            mplist.append('dericiousgarage')
+                            list1.append('@canadathings_')
+                            fllist.append('@canadathings_')
+                            mplist.append('canadathings_')
+                            list1.append('@simplify.this')
+                            fllist.append('@simplify.this')
+                            mplist.append('simplify.this')
+                            list1.append(username + '\n')
+                        elif x == 25:
+                            list1.append('@fotofocused')
+                            fllist.append('@fotofocused')
+                            mplist.append('fotofocused')
+                            list1.append('@salt.vault')
+                            fllist.append('@salt.vault')
+                            mplist.append('salt.vault')
+                            list1.append(username + '\n')
+                        elif x == 40:
+                            list1.append('@ryhxk')
+                            fllist.append('@ryhxk')
+                            mplist.append('ryhxk')
+                            list1.append(username + '\n')
+                        else:
+                            list1.append(username + '\n')
+
+                elif userdrop == False:
+                    reply('It\'s not time to drop [' + username + ']' )
+
+
+        elif text.startswith('D '):
+                srttt = str(us_id)
+                tele = '@' + srttt
+                pla = text[2:]
+                donename = pla.lower()
+                if '\n' in donename:
+                    reply('D @username with separate posts: ' + donename)
+                elif 'with @' in donename:
+                    reply('D your @username first the reply with \'Engaged with @otherusername\'')
+                elif ' engaged ' in donename:
+                    reply('D your @username first the reply with \'Engaged with @otherusername\'')
+                s = mainlist
+                if donename in s:
+                    mainlist.remove(donename)
+                    mn = fromlist
+                    if tele in mn:
+                        fromlist.remove(tele)
+                
+        elif text.startswith('d '):
+                srttt = str(us_id)
+                tele = '@' + srttt
+                pla = text[2:]
+                donename = pla.lower()
+                if '\n' in donename:
+                    reply('D @username with separate posts: ' + donename)
+                elif 'with @' in donename:
+                    reply('D your @username first the reply with \'Engaged with @otherusername\'')
+                elif ' engaged ' in donename:
+                    reply('D your @username first the reply with \'Engaged with @otherusername\'')
+                s = mainlist
+                if donename in s:
+                    mn = fromlist
+                    mainlist.remove(donename)
+                    if tele in mn:
+                        fromlist.remove(tele)
+        elif text.startswith('!'):
+            admin_id = str(us_id)
+            if admin_id in admins:
+                if text.startswith('!ban'):
+                    ya = str(text[5:])
+                    kk = ya + ' by: ' + admin_id
+                    black_leech.append(kk)
+                    reply('Added to banlist')
+                elif text == '!forceTrue':
+                    userdrop = True
+                    reply('TRUUUU FAM')
+                elif text == '!forceFalse':
+                    userdrop = False
+                    reply('NAHHHH FAM')
+                elif text == '!showbanlist':
+                    listblackleech = "\n".join(black_leech)
+                    reply('Currently Banned:\n' + listblackleech)
+                elif text.startswith('!updatebanlist'):
+                    a = len(black_leech)
+                    while a > 0:
+                        black_leech.pop()
+                        a -= 1
+                    appw = text[15:]
+                    black_leech.append(appw)
+                elif text.startswith('!unbanlist'):
+                    if admin_id == 'gainsforlife':
+                        remove = text[11:]
+                        if remove in black_leech:
+                            black_leech.remove(remove)
+                            reply('Removed: ' + remove)
+                        else:
+                            reply('Not in banlist')
+                    else:
+                        reply('Gains only')
+            else:
+                reply('Do not use admin commands')
+        elif 'next' in text and 'round' in text:
+            reply('ROUNDS: 3,6,9,12 AM/PM EASTERN TIME')
+        elif 'nr?' in text:
+            reply('ROUNDS: 3,6,9,12 AM/PM EASTERN TIME')
+        elif text.startswith('nr?'):
+            reply('ROUNDS: 3,6,9,12 AM/PM EASTERN TIME')
+        elif text.startswith('Nr?'):
+            reply('ROUNDS: 3,6,9,12 AM/PM EASTERN TIME')
+        elif text.startswith('NR?'):
+            reply('ROUNDS: 3,6,9,12 AM/PM EASTERN TIME')
+        elif 'when' in text and 'next' in text:
+            reply('ROUNDS: 3,6,9,12 AM/PM EASTERN TIME')
+        elif 'whatptime' in text:
+            reply('look at the corner of your screen!')
+        elif ' buy' in text:
+            reply('Buy/Sell here: Telegram.me/instagainsmarket')
+        elif ' sell' in text:
+            reply('Buy/Sell here: Telegram.me/instagainsmarket')
+        else:
+            if getEnabled(chat_id):
+                c = 5
+            else:
+                logging.info('not enabled for chat_id {}'.format(chat_id))
+
+
+app = webapp2.WSGIApplication([
+    ('/me', MeHandler),
+    ('/updates', GetUpdatesHandler),
+    ('/set_webhook', SetWebhookHandler),
+    ('/webhook', WebhookHandler),
+    ('/auto_list', autolist),
+    ('/auto_end', end),
+    ('/auto_leech', leech),
+    ('/auto_onehour', onehour),
+    ('/auto_forty', forty),
+    ('/auto_clearbl', clearbl),
+    ('/auto_keepdropping',keepdropping),
+    ('/auto_start', autostart)
+], debug=True)

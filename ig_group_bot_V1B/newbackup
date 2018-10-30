@@ -1,0 +1,1253 @@
+import StringIO
+import json
+import logging
+import random
+import urllib
+import urllib2
+from auto_start import *
+from auto_leech import *
+from auto_list import *
+from auto_h import *
+from auto_hlist import *
+from collections import defaultdict
+
+# for sending images
+from PIL import Image
+import multipart
+
+# standard app engine imports
+from google.appengine.api import urlfetch
+from google.appengine.ext import ndb
+import webapp2
+
+TOKEN = '270598300:AAEx-4WjC6IJ0_eTGW7iAwdMNEgP8PUhGEo'
+
+BASE_URL = 'https://api.telegram.org/bot' + TOKEN + '/'
+
+mainlist = []
+list1 = []
+list2 = []
+list3 = []
+list4 = []
+list5 = []
+list6 = []
+list7 = []
+list8 = []
+list9 = []
+list10 = []
+list11 = []
+list12 = []
+list13 = []
+list14 = []
+list15 = []
+list15 = []
+list17 = []
+list18 = []
+list19 = []
+list20 = []
+donelist = []
+leechlist = []
+fromlist = []
+telelist = []
+blacklist = ['@fun.look','@bestearth.travel','@hustlerluxury','@theluxuryhustler','@bapeme_','@michele_photography','@attonmiami','@styligram_','@zerofucksgivenlifestyle','@luxurytraveldiva','@the.lux.goals','@lovemadeleines','@exclusivecars','@realwilliewills','@ryanmagdanz','@zintnutrition']
+chatList = ['-1001082178741','-1001081667369']
+herelist = []
+otherlist = []
+fllist = []
+mplist = []
+x = 0
+excl =  u"\u203C"
+
+def bot_talk(msg=None, img=None):
+    if msg:
+        for p in chatList:
+            chat_id = p 
+            resp = urllib2.urlopen(BASE_URL + 'sendMessage', urllib.urlencode({
+                'chat_id': str(chat_id),
+                'text': msg.encode('utf-8'),
+                'disable_web_page_preview': 'true',
+                #'reply_to_message_id': str(message_id),
+            })).read()
+
+
+
+
+
+
+
+# ================================
+
+class EnableStatus(ndb.Model):
+    # key name: str(chat_id)
+    enabled = ndb.BooleanProperty(indexed=False, default=False)
+
+
+# ================================
+
+def setEnabled(chat_id, yes):
+    es = EnableStatus.get_or_insert(str(chat_id))
+    es.enabled = yes
+    es.put()
+
+def getEnabled(chat_id):
+    es = EnableStatus.get_by_id(str(chat_id))
+    if es:
+        return es.enabled
+    return False
+
+
+# ================================
+
+class MeHandler(webapp2.RequestHandler):
+    def get(self):
+        urlfetch.set_default_fetch_deadline(60)
+        self.response.write(json.dumps(json.load(urllib2.urlopen(BASE_URL + 'getMe'))))
+
+
+class GetUpdatesHandler(webapp2.RequestHandler):
+    def get(self):
+        urlfetch.set_default_fetch_deadline(60)
+        self.response.write(json.dumps(json.load(urllib2.urlopen(BASE_URL + 'getUpdates'))))
+
+class SetWebhookHandler(webapp2.RequestHandler):
+    def get(self):
+        urlfetch.set_default_fetch_deadline(60)
+        url = self.request.get('url')
+        if url:
+            self.response.write(json.dumps(json.load(urllib2.urlopen(BASE_URL + 'setWebhook', urllib.urlencode({'url': url})))))
+
+#==================================================================================================================================================
+
+class autolist(webapp2.RequestHandler):
+    def get(self):
+        chat_id = '-1001082178741'
+        def reply2(msg=None, img=None):
+            if msg:
+                resp = urllib2.urlopen(BASE_URL + 'sendMessage', urllib.urlencode({
+                    'chat_id': str(chat_id),
+                    'text': msg.encode('utf-8'),
+                    #'disable_web_page_preview': 'true',
+                    #'reply_to_message_id': str(message_id),
+                })).read() 
+        fl_list =  "\n".join(fllist)   
+        reply2('FL LIST\n' + fl_list)
+        mp_list =  "\n".join(mplist)   
+        reply2('MP LIST\n' + mp_list)        
+        xu = len(mainlist)
+        if xu < 15:
+            list_one = "\n".join(list1)
+            reply2("LIST 1\n" + list_one)
+        elif xu < 30:
+            list_one = "\n".join(list1)
+            reply2("LIST 1\n" + list_one)
+            list_two = "\n".join(list2)
+            reply2("LIST 2\n" + list_two)
+        elif xu < 45:
+            list_one = "\n".join(list1)
+            reply2("LIST 1\n" + list_one)
+            list_two = "\n".join(list2)
+            reply2("LIST 2\n" + list_two)             
+            list_three = "\n".join(list3)
+            reply2("LIST 3\n" + list_three)
+        elif xu < 60:
+            list_one = "\n".join(list1)
+            reply2("LIST 1\n" + list_one)
+            list_two = "\n".join(list2)
+            reply2("LIST 2\n" + list_two)             
+            list_three = "\n".join(list3)
+            reply2("LIST 3\n" + list_three)                   
+            list_four = "\n".join(list4)
+            reply2("LIST 4\n" + list_four)
+        elif xu < 75:
+            list_one = "\n".join(list1)
+            reply2("LIST 1\n" + list_one)
+            list_two = "\n".join(list2)
+            reply2("LIST 2\n" + list_two)             
+            list_three = "\n".join(list3)
+            reply2("LIST 3\n" + list_three)                   
+            list_four = "\n".join(list4)
+            reply2("LIST 4\n" + list_four)                          
+            list_five = "\n".join(list5)
+            reply2("LIST 5\n" + list_five)
+        elif xu < 90:
+            list_one = "\n".join(list1)
+            reply2("LIST 1\n" + list_one)
+            list_two = "\n".join(list2)
+            reply2("LIST 2\n" + list_two)             
+            list_three = "\n".join(list3)
+            reply2("LIST 3\n" + list_three)                   
+            list_four = "\n".join(list4)
+            reply2("LIST 4\n" + list_four)                          
+            list_five = "\n".join(list5)
+            reply2("LIST 5\n" + list_five)                 
+            list_six = "\n".join(list6)
+            reply2("LIST 6\n" + list_six)
+        elif xu < 105:
+            list_one = "\n".join(list1)
+            reply2("LIST 1\n" + list_one)
+            list_two = "\n".join(list2)
+            reply2("LIST 2\n" + list_two)             
+            list_three = "\n".join(list3)
+            reply2("LIST 3\n" + list_three)                   
+            list_four = "\n".join(list4)
+            reply2("LIST 4\n" + list_four)                          
+            list_five = "\n".join(list5)
+            reply2("LIST 5\n" + list_five)                 
+            list_six = "\n".join(list6)
+            reply2("LIST 6\n" + list_six)                 
+            list_seven = "\n".join(list7)
+            reply2("LIST 7\n" + list_seven)
+        elif xu < 120:
+            list_one = "\n".join(list1)
+            reply2("LIST 1\n" + list_one)
+            list_two = "\n".join(list2)
+            reply2("LIST 2\n" + list_two)             
+            list_three = "\n".join(list3)
+            reply2("LIST 3\n" + list_three)                   
+            list_four = "\n".join(list4)
+            reply2("LIST 4\n" + list_four)                          
+            list_five = "\n".join(list5)
+            reply2("LIST 5\n" + list_five)                 
+            list_six = "\n".join(list6)
+            reply2("LIST 6\n" + list_six)                 
+            list_seven = "\n".join(list7)
+            reply2("LIST 7\n" + list_seven)                  
+            list_eight = "\n".join(list8)
+            reply2("LIST 8\n" + list_eight)
+        elif xu < 135:
+            list_one = "\n".join(list1)
+            reply2("LIST 1\n" + list_one)
+            list_two = "\n".join(list2)
+            reply2("LIST 2\n" + list_two)             
+            list_three = "\n".join(list3)
+            reply2("LIST 3\n" + list_three)                   
+            list_four = "\n".join(list4)
+            reply2("LIST 4\n" + list_four)                          
+            list_five = "\n".join(list5)
+            reply2("LIST 5\n" + list_five)                 
+            list_six = "\n".join(list6)
+            reply2("LIST 6\n" + list_six)                 
+            list_seven = "\n".join(list7)
+            reply2("LIST 7\n" + list_seven)                  
+            list_eight = "\n".join(list8)
+            reply2("LIST 8\n" + list_eight)                   
+            list_nine = "\n".join(list9)
+            reply2("LIST 9\n" + list_nine)
+        elif xu < 150:
+            list_one = "\n".join(list1)
+            reply2("LIST 1\n" + list_one)
+            list_two = "\n".join(list2)
+            reply2("LIST 2\n" + list_two)             
+            list_three = "\n".join(list3)
+            reply2("LIST 3\n" + list_three)                   
+            list_four = "\n".join(list4)
+            reply2("LIST 4\n" + list_four)                          
+            list_five = "\n".join(list5)
+            reply2("LIST 5\n" + list_five)                 
+            list_six = "\n".join(list6)
+            reply2("LIST 6\n" + list_six)                 
+            list_seven = "\n".join(list7)
+            reply2("LIST 7\n" + list_seven)                  
+            list_eight = "\n".join(list8)
+            reply2("LIST 8\n" + list_eight)                   
+            list_nine = "\n".join(list9)
+            reply2("LIST 9\n" + list_nine)    
+            list_ten = "\n".join(list10)
+            reply2("LIST 10\n" + list_ten)
+        elif xu < 165:
+            list_one = "\n".join(list1)
+            reply2("LIST 1\n" + list_one)
+            list_two = "\n".join(list2)
+            reply2("LIST 2\n" + list_two)             
+            list_three = "\n".join(list3)
+            reply2("LIST 3\n" + list_three)                   
+            list_four = "\n".join(list4)
+            reply2("LIST 4\n" + list_four)                          
+            list_five = "\n".join(list5)
+            reply2("LIST 5\n" + list_five)                 
+            list_six = "\n".join(list6)
+            reply2("LIST 6\n" + list_six)                 
+            list_seven = "\n".join(list7)
+            reply2("LIST 7\n" + list_seven)                  
+            list_eight = "\n".join(list8)
+            reply2("LIST 8\n" + list_eight)                   
+            list_nine = "\n".join(list9)
+            reply2("LIST 9\n" + list_nine)    
+            list_ten = "\n".join(list10)
+            reply2("LIST 10\n" + list_ten)
+            list_eleven = "\n".join(list11)
+            reply2("LIST 11\n" + list_eleven)
+        elif xu < 180:
+            list_one = "\n".join(list1)
+            reply2("LIST 1\n" + list_one)
+            list_two = "\n".join(list2)
+            reply2("LIST 2\n" + list_two)             
+            list_three = "\n".join(list3)
+            reply2("LIST 3\n" + list_three)                   
+            list_four = "\n".join(list4)
+            reply2("LIST 4\n" + list_four)                          
+            list_five = "\n".join(list5)
+            reply2("LIST 5\n" + list_five)                 
+            list_six = "\n".join(list6)
+            reply2("LIST 6\n" + list_six)                 
+            list_seven = "\n".join(list7)
+            reply2("LIST 7\n" + list_seven)                  
+            list_eight = "\n".join(list8)
+            reply2("LIST 8\n" + list_eight)                   
+            list_nine = "\n".join(list9)
+            reply2("LIST 9\n" + list_nine)    
+            list_ten = "\n".join(list10)
+            reply2("LIST 10\n" + list_ten)
+            list_eleven = "\n".join(list11)
+            reply2("LIST 11\n" + list_eleven)                 
+            list_twelve = "\n".join(list12)
+            reply2("LIST 12\n" + list_twelve)
+        elif xu < 195:
+            list_one = "\n".join(list1)
+            reply2("LIST 1\n" + list_one)
+            list_two = "\n".join(list2)
+            reply2("LIST 2\n" + list_two)             
+            list_three = "\n".join(list3)
+            reply2("LIST 3\n" + list_three)                   
+            list_four = "\n".join(list4)
+            reply2("LIST 4\n" + list_four)                          
+            list_five = "\n".join(list5)
+            reply2("LIST 5\n" + list_five)                 
+            list_six = "\n".join(list6)
+            reply2("LIST 6\n" + list_six)                 
+            list_seven = "\n".join(list7)
+            reply2("LIST 7\n" + list_seven)                  
+            list_eight = "\n".join(list8)
+            reply2("LIST 8\n" + list_eight)                   
+            list_nine = "\n".join(list9)
+            reply2("LIST 9\n" + list_nine)    
+            list_ten = "\n".join(list10)
+            reply2("LIST 10\n" + list_ten)
+            list_eleven = "\n".join(list11)
+            reply2("LIST 11\n" + list_eleven)                 
+            list_twelve = "\n".join(list12)
+            reply2("LIST 12\n" + list_twelve)            
+            list_thirteen = "\n".join(list13)
+            reply2("LIST 13\n" + list_thirteen)
+        elif xu < 210:
+            list_one = "\n".join(list1)
+            reply2("LIST 1\n" + list_one)
+            list_two = "\n".join(list2)
+            reply2("LIST 2\n" + list_two)             
+            list_three = "\n".join(list3)
+            reply2("LIST 3\n" + list_three)                   
+            list_four = "\n".join(list4)
+            reply2("LIST 4\n" + list_four)                          
+            list_five = "\n".join(list5)
+            reply2("LIST 5\n" + list_five)                 
+            list_six = "\n".join(list6)
+            reply2("LIST 6\n" + list_six)                 
+            list_seven = "\n".join(list7)
+            reply2("LIST 7\n" + list_seven)                  
+            list_eight = "\n".join(list8)
+            reply2("LIST 8\n" + list_eight)                   
+            list_nine = "\n".join(list9)
+            reply2("LIST 9\n" + list_nine)    
+            list_ten = "\n".join(list10)
+            reply2("LIST 10\n" + list_ten)
+            list_eleven = "\n".join(list11)
+            reply2("LIST 11\n" + list_eleven)                 
+            list_twelve = "\n".join(list12)
+            reply2("LIST 12\n" + list_twelve)            
+            list_thirteen = "\n".join(list13)
+            reply2("LIST 13\n" + list_thirteen)                   
+            list_fourteen = "\n".join(list14)
+            reply2("LIST 14\n" + list_fourteen)
+        elif xu < 225:
+            list_one = "\n".join(list1)
+            reply2("LIST 1\n" + list_one)
+            list_two = "\n".join(list2)
+            reply2("LIST 2\n" + list_two)             
+            list_three = "\n".join(list3)
+            reply2("LIST 3\n" + list_three)                   
+            list_four = "\n".join(list4)
+            reply2("LIST 4\n" + list_four)                          
+            list_five = "\n".join(list5)
+            reply2("LIST 5\n" + list_five)                 
+            list_six = "\n".join(list6)
+            reply2("LIST 6\n" + list_six)                 
+            list_seven = "\n".join(list7)
+            reply2("LIST 7\n" + list_seven)                  
+            list_eight = "\n".join(list8)
+            reply2("LIST 8\n" + list_eight)                   
+            list_nine = "\n".join(list9)
+            reply2("LIST 9\n" + list_nine)    
+            list_ten = "\n".join(list10)
+            reply2("LIST 10\n" + list_ten)
+            list_eleven = "\n".join(list11)
+            reply2("LIST 11\n" + list_eleven)                 
+            list_twelve = "\n".join(list12)
+            reply2("LIST 12\n" + list_twelve)            
+            list_thirteen = "\n".join(list13)
+            reply2("LIST 13\n" + list_thirteen)                   
+            list_fourteen = "\n".join(list14)
+            reply2("LIST 14\n" + list_fourteen)                  
+            list_fifteen = "\n".join(list15)
+            reply2("LIST 15\n" + list_fifteen)    
+        elif xu < 240:
+            list_one = "\n".join(list1)
+            reply2("LIST 1\n" + list_one)
+            list_two = "\n".join(list2)
+            reply2("LIST 2\n" + list_two)             
+            list_three = "\n".join(list3)
+            reply2("LIST 3\n" + list_three)                   
+            list_four = "\n".join(list4)
+            reply2("LIST 4\n" + list_four)                          
+            list_five = "\n".join(list5)
+            reply2("LIST 5\n" + list_five)                 
+            list_six = "\n".join(list6)
+            reply2("LIST 6\n" + list_six)                 
+            list_seven = "\n".join(list7)
+            reply2("LIST 7\n" + list_seven)                  
+            list_eight = "\n".join(list8)
+            reply2("LIST 8\n" + list_eight)                   
+            list_nine = "\n".join(list9)
+            reply2("LIST 9\n" + list_nine)    
+            list_ten = "\n".join(list10)
+            reply2("LIST 10\n" + list_ten)
+            list_eleven = "\n".join(list11)
+            reply2("LIST 11\n" + list_eleven)                 
+            list_twelve = "\n".join(list12)
+            reply2("LIST 12\n" + list_twelve)            
+            list_thirteen = "\n".join(list13)
+            reply2("LIST 13\n" + list_thirteen)                   
+            list_fourteen = "\n".join(list14)
+            reply2("LIST 14\n" + list_fourteen)                  
+            list_fifteen = "\n".join(list15)
+            reply2("LIST 15\n" + list_fifteen)
+            list_sixteen = "\n".join(list16)
+            reply2("LIST 16\n" + list_sixteen)
+        elif xu < 255:
+            list_one = "\n".join(list1)
+            reply2("LIST 1\n" + list_one)
+            list_two = "\n".join(list2)
+            reply2("LIST 2\n" + list_two)             
+            list_three = "\n".join(list3)
+            reply2("LIST 3\n" + list_three)                   
+            list_four = "\n".join(list4)
+            reply2("LIST 4\n" + list_four)                          
+            list_five = "\n".join(list5)
+            reply2("LIST 5\n" + list_five)                 
+            list_six = "\n".join(list6)
+            reply2("LIST 6\n" + list_six)                 
+            list_seven = "\n".join(list7)
+            reply2("LIST 7\n" + list_seven)                  
+            list_eight = "\n".join(list8)
+            reply2("LIST 8\n" + list_eight)                   
+            list_nine = "\n".join(list9)
+            reply2("LIST 9\n" + list_nine)    
+            list_ten = "\n".join(list10)
+            reply2("LIST 10\n" + list_ten)
+            list_eleven = "\n".join(list11)
+            reply2("LIST 11\n" + list_eleven)                 
+            list_twelve = "\n".join(list12)
+            reply2("LIST 12\n" + list_twelve)            
+            list_thirteen = "\n".join(list13)
+            reply2("LIST 13\n" + list_thirteen)                   
+            list_fourteen = "\n".join(list14)
+            reply2("LIST 14\n" + list_fourteen)                  
+            list_fifteen = "\n".join(list15)
+            reply2("LIST 15\n" + list_fifteen)
+            list_sixteen= "\n".join(list16)
+            reply2("LIST 16\n" + list_sixteen)
+            list_seventeen= "\n".join(list17)
+            reply2("LIST 17\n" + list_seventeen)
+        elif xu < 270:
+            list_one = "\n".join(list1)
+            reply2("LIST 1\n" + list_one)
+            list_two = "\n".join(list2)
+            reply2("LIST 2\n" + list_two)             
+            list_three = "\n".join(list3)
+            reply2("LIST 3\n" + list_three)                   
+            list_four = "\n".join(list4)
+            reply2("LIST 4\n" + list_four)                          
+            list_five = "\n".join(list5)
+            reply2("LIST 5\n" + list_five)                 
+            list_six = "\n".join(list6)
+            reply2("LIST 6\n" + list_six)                 
+            list_seven = "\n".join(list7)
+            reply2("LIST 7\n" + list_seven)                  
+            list_eight = "\n".join(list8)
+            reply2("LIST 8\n" + list_eight)                   
+            list_nine = "\n".join(list9)
+            reply2("LIST 9\n" + list_nine)    
+            list_ten = "\n".join(list10)
+            reply2("LIST 10\n" + list_ten)
+            list_eleven = "\n".join(list11)
+            reply2("LIST 11\n" + list_eleven)                 
+            list_twelve = "\n".join(list12)
+            reply2("LIST 12\n" + list_twelve)            
+            list_thirteen = "\n".join(list13)
+            reply2("LIST 13\n" + list_thirteen)                   
+            list_fourteen = "\n".join(list14)
+            reply2("LIST 14\n" + list_fourteen)                  
+            list_fifteen = "\n".join(list15)
+            reply2("LIST 15\n" + list_fifteen)
+            list_sixteen= "\n".join(list16)
+            reply2("LIST 16\n" + list_sixteen)
+            list_seventeen= "\n".join(list17)
+            reply2("LIST 17\n" + list_seventeen)
+            list_eighteen = "\n".join(list18)
+            reply2("LIST 18\n" + list_eighteen)
+        reply2(excl + ' When done, say D @username.\n    Like latest photo from ALL lists\n' + excl + ' If you engaged with a different account, D @droppedIG then reply to that post with \'engaged with @engagedIG\'\n\nYou have 1.5 hours to engage')
+
+#==================================================================================================================================================
+
+class clearbl(webapp2.RequestHandler):
+    def get(self):
+        for p in blacklist:
+            blacklist.pop()
+        for p in chatList:
+            chat_id = p 
+            def reply123(msg=None, img=None):
+                if msg:
+                    resp = urllib2.urlopen(BASE_URL + 'sendMessage', urllib.urlencode({
+                        'chat_id': str(chat_id),
+                        'text': msg.encode('utf-8'),
+                        #'disable_web_page_preview': 'true',
+                        #'reply_to_message_id': str(message_id),
+        })).read()        
+            reply123('Blacklist Cleared')        
+
+class end(webapp2.RequestHandler):
+    def get(self):
+        for p in chatList:
+            chat_id = p
+            def reply8(msg=None, img=None):
+                if msg:
+                    resp = urllib2.urlopen(BASE_URL + 'sendMessage', urllib.urlencode({
+                        'chat_id': str(chat_id),
+                        'text': msg.encode('utf-8'),
+                        #'disable_web_page_preview': 'true',
+                        #'reply_to_message_id': str(message_id),
+        })).read()
+            p = len(mainlist)
+            if p > 0:
+                reply8(excl + ' Round has ended. If you haven\'t finished by now, you may be blacklisted.\n\n**Next round is in 1 hour\n\nINVITE MORE PEOPLE!\nInvite link: https://telegram.me/joinchat/ES2a4kCAvLWMoroIs6fhxQ\n\nCOMMENT ROUND: https://telegram.me/joinchat/ES2a4j6cdD2TGadXr9b5XA\nDISCUSSION: https://telegram.me/joinchat/ES2a4j8lNre1pZ5VM4zuUA')
+            else:
+                reply8(excl + ' Round has ended with no leechers!\n\n**Next round is in 1 hour\n\nINVITE MORE PEOPLE!\nInvite link: https://telegram.me/joinchat/ES2a4kCAvLWMoroIs6fhxQ\n\nCOMMENT ROUND: https://telegram.me/joinchat/ES2a4j6cdD2TGadXr9b5XA\nDISCUSSION: https://telegram.me/joinchat/ES2a4j8lNre1pZ5VM4zuUA')
+
+
+class onehour(webapp2.RequestHandler):
+    def get(self):
+        for p in chatList:
+            chat_id = p
+            def reply10(msg=None, img=None):
+                if msg:
+                    resp = urllib2.urlopen(BASE_URL + 'sendMessage', urllib.urlencode({
+                        'chat_id': str(chat_id),
+                        'text': msg.encode('utf-8'),
+                        #'disable_web_page_preview': 'true',
+                        #'reply_to_message_id': str(message_id),
+        })).read()
+            reply10('NR in 10 minutes\nGet ready!\n\nLet people know a round is happening!\nInvite Link: https://telegram.me/joinchat/ES2a4kCAvLWMoroIs6fhxQ')
+
+class forty(webapp2.RequestHandler):
+    def get(self):
+        for p in chatList:
+            chat_id = p
+            def reply9(msg=None, img=None):
+                if msg:
+                    resp = urllib2.urlopen(BASE_URL + 'sendMessage', urllib.urlencode({
+                        'chat_id': str(chat_id),
+                        'text': msg.encode('utf-8'),
+                        #'disable_web_page_preview': 'true',
+                        #'reply_to_message_id': str(message_id),
+        })).read()
+            reply9('*40 minutes till next round\nRound starts at :40\nGet ready!\n\nLet people know a round is about to happen!\nInvite Link: https://telegram.me/joinchat/ES2a4kCAvLWMoroIs6fhxQ')
+
+class keepdropping(webapp2.RequestHandler):
+    def get(self):
+        for p in chatList:
+            chat_id = p
+            def reply101(msg=None, img=None):
+                if msg:
+                    resp = urllib2.urlopen(BASE_URL + 'sendMessage', urllib.urlencode({
+                        'chat_id': str(chat_id),
+                        'text': msg.encode('utf-8'),
+                        #'disable_web_page_preview': 'true',
+                        #'reply_to_message_id': str(message_id),
+        })).read()
+            reply101('KEEP DROPPING\nLET PEOPLE KNOW A DROP IS HAPPNING NOW\nInvite Link: https://telegram.me/joinchat/ES2a4kCAvLWMoroIs6fhxQ')
+#==================================================================================================================================================
+htrue = []
+
+class autostart(webapp2.RequestHandler):
+    def get(self):
+        a = len(mainlist)
+        while a > 0:
+            mainlist.pop()
+            a -= 1
+        a = len(list1)
+        while a > 0:
+            list1.pop()
+            a -= 1
+        a = len(list2)
+        while a > 0:
+            list2.pop()
+            a -= 1
+        a = len(list3)
+        while a > 0:
+            list3.pop()
+            a -= 1
+        a = len(list4)
+        while a > 0:
+            list4.pop()
+            a -= 1
+        a = len(list5)
+        while a > 0:
+            list5.pop()
+            a -= 1
+        a = len(list6)
+        while a > 0:
+            list6.pop()
+            a -= 1
+        a = len(list7)
+        while a > 0:
+            list7.pop()
+            a -= 1
+        a = len(list8)
+        while a > 0:
+            list8.pop()
+            a -= 1
+        a = len(list9)
+        while a > 0:
+            list9.pop()
+            a -= 1
+        a = len(list10)
+        while a > 0:
+            list10.pop()
+            a -= 1
+        a = len(list11)
+        while a > 0:
+            list11.pop()
+            a -= 1
+        a = len(list12)
+        while a > 0:
+            list12.pop()
+            a -= 1
+        a = len(list13)
+        while a > 0:
+            list13.pop()
+            a -= 1
+        a = len(list14)
+        while a > 0:
+            list14.pop()
+            a -= 1
+        a = len(list15)
+        while a > 0:
+            list15.pop()
+            a -= 1   
+        a = len(list16)
+        while a > 0:
+            list16.pop()
+            a -= 1    
+        a = len(list17)
+        while a > 0:
+            list17.pop()
+            a -= 1   
+        a = len(list18)
+        while a > 0:
+            list18.pop()
+            a -= 1   
+        a = len(fllist)    
+        while a > 0:
+            fllist.pop()
+            a -= 1
+        a = len(mplist)    
+        while a > 0:
+            mplist.pop()
+            a -= 1 
+        list1.append('@instagain.s')
+        fllist.append('@instagain.s')
+        mplist.append('instagain.s')
+        list1.append('@thequot3s')
+        fllist.append('@thequot3s')
+        mplist.append('thequot3s')
+        for p in chatList:
+            chat_id = p
+            def reply3(msg=None, img=None):
+                if msg:
+                    resp = urllib2.urlopen(BASE_URL + 'sendMessage', urllib.urlencode({
+                        'chat_id': str(chat_id),
+                        'text': msg.encode('utf-8'),
+                        #'disable_web_page_preview': 'true',
+                        #'reply_to_message_id': str(message_id),
+        })).read() 
+            reply3(excl + 'DROP DROP DROP DROP\nRound Is Starting. Drop your @usernames now\nList will drop in 20 minutes\n**If you can\'t make this round but you entered, just enter /remove @username')  
+
+#==================================================================================================================================================
+class leech(webapp2.RequestHandler):
+    def get(self):
+        for p in chatList:
+            chat_id = p
+            def reply4(msg=None, img=None):
+                if msg:
+                    resp = urllib2.urlopen(BASE_URL + 'sendMessage', urllib.urlencode({
+                        'chat_id': str(chat_id),
+                        'text': msg.encode('utf-8'),
+                        #'disable_web_page_preview': 'true',
+                        #'reply_to_message_id': str(message_id),
+        })).read()
+            p = len(mainlist)
+            if p > 0:
+                leechers = "\n".join(mainlist)
+                reply4('Still missing engagement from:\n')
+                reply4(leechers)
+                reply4('If your name is on that list and you engaged, you probably didn\'t D properly\nRead the instructions on how to format D')
+            else:
+                reply4('No Leechers!')
+
+
+class WebhookHandler(webapp2.RequestHandler):
+    def post(self):
+        urlfetch.set_default_fetch_deadline(60)
+        body = json.loads(self.request.body)
+        logging.info('request body:')
+        logging.info(body)
+        self.response.write(json.dumps(body))
+
+        update_id = body['update_id']
+        try:
+            message = body['message']
+        except:
+            message = body['edited_message']
+        message_id = message.get('message_id')
+        #us_id = message['id']
+        date = message.get('date')
+        text = message.get('text')
+        us_idr = message.get('from')
+        us_id = us_idr['id']
+        chat = message['chat']
+        chat_id = chat['id']
+        excl = u'uE252'
+
+        if not text:
+            logging.info('no text')
+            return
+        if chat_id not in chatList:
+            otherlist.append(chat_id)
+        def reply(msg=None, img=None):
+            if msg:
+                resp = urllib2.urlopen(BASE_URL + 'sendMessage', urllib.urlencode({
+                    'chat_id': str(chat_id),
+                    'text': msg.encode('utf-8'),
+                    #'disable_web_page_preview': 'true',
+                    #'reply_to_message_id': str(message_id),
+                })).read()
+            elif img:
+                resp = multipart.post_multipart(BASE_URL + 'sendPhoto', [
+                    ('chat_id', str(chat_id)),
+                    ('reply_to_message_id', str(message_id)),
+                ], [
+                    ('photo', 'image.jpg', img),
+                ])
+            else:
+                logging.error('no msg or img specified')
+                resp = None
+
+            logging.info('send response:')
+            logging.info(resp)
+        if text == ('/triggertest'):
+            reply('trigger test is working.')
+            reply('ROUND IS STARTING:\nEnter: \n    @lowercase for likes only\n@CAPITALS for likes and comments (4+ words) \nFor multiple usernames, enter them separately \nList will drop in around 20 minutes.')
+        if text.startswith('/'):
+            if text == '/start':
+                reply('Bot enabled')
+                setEnabled(chat_id, True)
+            elif text == '/stop':
+                reply('Bot disabled')
+                setEnabled(chat_id, False)
+            elif text == '/justdo':
+                reply('i really did shit')
+            elif text == "/dontfuckingmanualstart":
+                reply('Round Is Starting. Drop your @usernames now\n    add NC for no comment eg: @username NC\n    NC also means you will not receive comment\n\nIF USING MULTIPLE ACCOUNTS, DROP SEPARATELY\n\nComments must be 4+ words') 
+                a = len(mainlist)
+                while a > 0:
+                    mainlist.pop()
+                    a -= 1
+                a = len(list1)
+                while a > 0:
+                    list1.pop()
+                    a -= 1
+                a = len(list2)
+                while a > 0:
+                    list2.pop()
+                    a -= 1
+                a = len(list3)
+                while a > 0:
+                    list3.pop()
+                    a -= 1
+                a = len(list4)
+                while a > 0:
+                    list4.pop()
+                    a -= 1
+                a = len(list5)
+                while a > 0:
+                    list5.pop()
+                    a -= 1
+                a = len(list6)
+                while a > 0:
+                    list6.pop()
+                    a -= 1
+                a = len(list7)
+                while a > 0:
+                    list7.pop()
+                    a -= 1
+                a = len(list8)
+                while a > 0:
+                    list8.pop()
+                    a -= 1
+                a = len(list9)
+                while a > 0:
+                    list9.pop()
+                    a -= 1
+                a = len(list10)
+                while a > 0:
+                    list10.pop()
+                    a -= 1
+                a = len(list11)
+                while a > 0:
+                    list11.pop()
+                    a -= 1
+                a = len(list12)
+                while a > 0:
+                    list12.pop()
+                    a -= 1
+                while a > 0:
+                    list13.pop()
+                    a -= 1
+                while a > 0:
+                    list14.pop()
+                    a -= 1
+                while a > 0:
+                    list15.pop()
+                    a -= 1
+                a = len(fromlist)
+                while a > 0:
+                    fromlist.pop()
+                    a -= 1
+                while a > 0:
+                    fllist.pop()
+                    a -= 1
+                while a > 0:
+                    mplist.pop()
+                    a -= 1
+            elif text == "/listlist":
+                reply('When done, say D @username.\n    If you added NC, include the NC eg: D @username NC\n\nMust enter usernames separate lines\nIf you engaged with a different account, say D @droppedIG then reply to that comment with \'engaged with @engageIG\'\nFailure to follow these rules may result in a ban')
+                xu = len(list1)
+                if xu > 0:
+                    list_one = "\n".join(list1)
+                    reply("LIST 1")
+                    reply(list_one)
+                xu = len(list2)
+                if xu > 0:
+                    list_two = "\n".join(list2)
+                    reply("LIST 2")
+                    reply(list_two)
+                xu = len(list3)
+                if xu > 0:
+                    list_three = "\n".join(list3)
+                    reply("LIST 3")
+                    reply(list_three)
+                xu = len(list4)
+                if xu > 0:
+                    list_four = "\n".join(list4)
+                    reply("LIST 4")
+                    reply(list_four)
+                xu = len(list5)
+                if xu > 0:
+                    list_five = "\n".join(list5)
+                    reply("LIST 5")
+                    reply(list_five)
+                xu = len(list6)
+                if xu > 0:
+                    list_six = "\n".join(list6)
+                    reply("LIST 6")
+                    reply(list_six)
+                xu = len(list7)
+                if xu > 0:
+                    list_seven = "\n".join(list7)
+                    reply("LIST 7")
+                    reply(list_seven)
+                xu = len(list8)
+                if xu > 0:
+                    list_eight = "\n".join(list8)
+                    reply("LIST 8")
+                    reply(list_eight)
+                xu = len(list9)
+                if xu > 0:
+                    list_nine = "\n".join(list9)
+                    reply("LIST 9")
+                    reply(list_nine)
+                xu = len(list10)
+                if xu > 0:
+                    list_ten = "\n".join(list10)
+                    reply("LIST 10")
+                    reply(list_ten)
+                xu = len(list11)
+                if xu > 0:
+                    list_eleven = "\n".join(list11)
+                    reply("LIST 11")
+                    reply(list_eleven)
+                xu = len(list12)
+                if xu > 0:
+                    list_twelve = "\n".join(list12)
+                    reply("LIST 12")
+                    reply(list_twelve)
+                xu = len(list13)
+                if xu > 0:
+                    list_thirteen = "\n".join(list13)
+                    reply("LIST 13")
+                    reply(list_thirteen)
+                xu = len(list14)
+                if xu > 0:
+                    list_fourteen = "\n".join(list14)
+                    reply("LIST 14")
+                    reply(list_fourteen)
+                xu = len(list15)
+                if xu > 0:
+                    list_fifteen = "\n".join(list15)
+                    reply("LIST 15")
+                    reply(list_fifteen)
+                fl_list =  "\n".join(fllist)   
+                reply('FL LIST\n' + fl_list)
+                reply(excl + ' When done, say D @username.\nEngage on latest photo')
+                reply(excl + ' If you engaged with a different account, D @droppedIG then reply to that post with \'engaged with @engagedIG\'')
+            elif text.startswith('/done'):
+                donename = text[5:]
+                s = mainlist
+                if donename in s:
+                    mainlist.remove(donename)
+            elif text == '/manualcheck':
+                p = len(mainlist)
+                if p > 0:
+                    leechers = "\n".join(mainlist)
+                    reply('Still missing engagement from:\n')
+                    reply(leechers)
+                    for n,g in zip(mainlist,fromlist):
+                        print n + ' ' + g
+                else:
+                    reply('No Leechers!')
+            elif text == '/clearblacklist':
+                p = len(blacklist)
+                while p > 0:
+                    blacklist.pop()
+                    p -= 1
+                reply('Blacklist cleared')
+            elif text == '/telecheck':
+                p = len(fromlist)
+                if p > 0:
+                    leecht = "\n".join(fromlist)
+                    reply('Still missing engagement from:\n')
+                    reply(leecht)
+                else:
+                    reply('No Leechers!')
+            elif text == '/showblacklist':
+                shobl = "\n".join(blacklist)
+                reply("BLACKLIST")
+                reply(shobl)
+            elif text == '/end':
+                reply('Round has ended')
+            elif text == '/rules':
+                reply('*When the bot says drop, drop you @IGusername\n*Do not drop before bot tells you to\n*Do not drop after the bot drops the list\n **If you dropped your name but want to be removed from the list, say /remove @name\nThis is a like only group.\nD @username when you are done engaging the list.\n\n    **You will get a warn if you D wrong and potentially get added to the leechlist\n    **If you complain that you did not get comments, you will get a warn.')
+            elif text.startswith('/blacklist'):
+                blname = text[11:]
+                if blname not in blacklist:
+                    blacklist.append(blname)
+                    reply('Added to blacklist: ' + blname)
+                else:
+                    reply('Already in blacklist ' + blname)
+            elif text.startswith('/unblacklist'):
+                blname = text[13:]
+                if blname in blacklist:
+                    blacklist.remove(blname)
+                    reply('Removed from blacklist: ' + blname)
+                else:
+                    reply('Not in blacklist: ' + blname)
+            elif text.startswith('/remove'):
+                pla = text[8:]
+                removename = pla.lower()
+                tele = '@' + us_id
+                qw = mainlist
+                asdaf = text[9:]
+                if removename in qw:
+                    mainlist.remove(removename)
+                    reply('Removed: ' + removename)
+                if removename in fllist:
+                    fllist.remove(removename)
+                if asdaf in mplist:
+                    mplist.remove(asdaf)
+                else:
+                    reply('Name not on list')
+                qw = fromlist
+                if tele in qw:
+                    fromlist.remove(tele) 
+                s = list1
+                if removename in s:
+                    list1.remove(removename)   
+                s = list2
+                if removename in s:
+                    list2.remove(removename)
+                s = list3
+                if removename in s:
+                    list3.remove(removename)  
+                s = list4
+                if removename in s:
+                    list4.remove(removename)  
+                s = list5
+                if removename in s:
+                    list5.remove(removename)  
+                s = list6
+                if removename in s:
+                    list6.remove(removename) 
+                s = list7
+                if removename in s:
+                    list7.remove(removename)      
+                s = list8
+                if removename in s:
+                    list8.remove(removename)  
+                s = list9
+                if removename in s:
+                    list9.remove(removename)  
+                s = list10
+                if removename in s:
+                    list10.remove(removename) 
+                s = list11
+                if removename in s:
+                    list11.remove(removename) 
+                s = list12
+                if removename in s:
+                    list12.remove(removename)  
+                s = list13
+                if removename in s:
+                    list13.remove(removename)     
+                s = list14
+                if removename in s:
+                    list14.remove(removename)  
+                s = list15
+                if removename in s:
+                    list15.remove(removename)   
+                s = list16
+                if removename in s:
+                    list16.remove(removename)   
+                s = list17
+                if removename in s:
+                    list17.remove(removename)   
+                s = list18
+                if removename in s:
+                    list18.remove(removename)      
+
+        # CUSTOMIZE FROM HERE
+
+        elif text.startswith('@'):
+            pla = text.lower()
+            username = pla
+            if username == '@globevacations':
+                if username not in blacklist: 
+                    blacklist.append(username)
+            elif ' nc' in username:
+                reply('DO NOT PUT NC: ' + username)
+            elif ' rc' in username:
+                reply('DO NOT INCLUDE ANYTHING AFTER USERNAME: ' + username)
+            elif ' RC' in username:
+                reply('DO NOT INCLUDE ANYTHING AFTER USERNAME: ' + username)
+            elif ' NC' in username:
+                reply('DO NOT PUT NC :' + username)
+            elif '\n' in username:
+                reply('ONLY ENTER ONE USERNAME AT A TIME: \n' + username)
+            elif username not in blacklist:
+                mpname = username[1:]
+                mainlist.append(username)
+                fllist.append(username)
+                mplist.append(mpname)
+                tele = '@' + us_id 
+                fromlist.append(tele)
+                #reply('appended to main')
+                x = len(mainlist)
+                if x < 14:
+                    list1.append(username)
+                elif x == 14:
+                    list1.append('@joshquines')
+                    fllist.append('@joshquines')
+                    mplist.append('joshquines')
+                    list1.append(username)
+                elif x == 15:
+                    list1.append(username)
+                elif x > 15 and x < 22:
+                    list2.append(username)
+                elif x == 22:
+                    #list2.append('@joshquines')
+                    #fllist.append('@joshquines')
+                    #mplist.append('joshquines')
+                    list2.append(username)
+                    list2.append('@dericiousgarage')
+                    fllist.append('@dericiousgarage')
+                    mplist.append('dericiousgarage')
+                    list2.append('@canadathings_')
+                    fllist.append('@canadathings_')
+                    mplist.append('canadathings_')
+                    list1.append('@auralapse')
+                    fllist.append('@auralapse')
+                    mplist.append('auralapse')
+                    list2.append('@simplify.this')
+                    fllist.append('@simplify.this')
+                    mplist.append('simplify.this')
+                elif x > 22 and x < 30:
+                    list2.append(username)
+                elif x > 29 and x < 32:
+                    list3.append(username)
+                elif x == 32:
+                    #list3.append('@josh.quines_')
+                    list3.append(username)
+                    list3.append('@fotofocused')
+                    fllist.append('@fotofocused')
+                    mplist.append('fotofocused')
+                    list3.append('@salt.vault')
+                    fllist.append('@salt.vault')
+                    mplist.append('salt.vault')
+                    #list3.append('@flipdiaries')
+                    #list3.append('@antininefive')
+                    #fllist.append('@antininefive')
+                    #mplist.append('antininefive')
+                elif x > 32 and x < 45:
+                    list3.append(username)
+                elif x > 44 and x < 50:
+                    list4.append(username)
+                elif x == 50:
+                    #list4.append('@auralapse')
+                    list4.append(username)
+                elif x > 50 and x < 60:
+                    list4.append(username)
+                elif x > 59 and x < 65:
+                    list5.append(username)
+                elif x == 65:
+                    #list5.append('@canadathings_')
+                    list5.append(username)
+                elif x > 65 and x < 75:
+                    list5.append(username)
+                elif x > 74 and x < 80:
+                    list6.append(username)
+                elif x == 80:
+                    #list6.append(username)
+                    list3.append('@ryhxk')
+                    fllist.append('@ryhxk')
+                    mplist.append('ryhxk')
+                    list6.append(username)
+                elif x > 80 and x < 90:
+                    list6.append(username)
+                elif x > 89 and x < 95:
+                    list7.append(username)
+                elif x == 95:
+                    #list7.append('@fotofocused')
+                    list7.append(username)
+                elif x > 95 and x < 105:
+                    list7.append(username)
+                elif x > 104 and x < 110:
+                    list8.append(username)
+                elif x == 110:
+                    #list8.append(username)
+                    list8.append(username)
+                elif x > 110 and x < 120:
+                    list8.append(username)
+                elif x > 119 and x < 125:
+                    list9.append(username)
+                elif x == 125:
+                    #list9.append(username)
+                    list9.append(username)
+                elif x > 125 and x < 135:
+                    list9.append(username)
+                elif x > 134 and x < 140:
+                    list10.append(username)
+                elif x == 140:
+                    list10.append(username)
+                elif x > 140 and x < 150:
+                    list10.append(username)
+                elif x > 149 and x < 155:
+                    list11.append(username)
+                elif x == 155:
+                    #list11.append(username)
+                    list11.append(username)
+                elif x > 155 and x < 165:
+                    list11.append(username)
+                elif x > 164 and x < 170:
+                    list12.append(username)
+                elif x == 170:
+                    #list12.append(username)
+                    list12.append(username)
+                elif x > 170 and x < 180:
+                    list12.append(username)
+                elif x > 179 and x < 185:
+                    list13.append(username)
+                elif x == 185:
+                    #list13.append(username)
+                    list13.append(username)
+                elif x > 185 and x < 195:
+                    list13.append(username)
+                elif x > 194 and x < 200:
+                    list14.append(username)
+                elif x == 200:
+                    #list14.append(username)
+                    list14.append(username)
+                elif x > 200 and x < 210:
+                    list14.append(username)
+                elif x > 209 and x < 215:
+                    list15.append(username)
+                elif x == 215:
+                    #list15.append(username)
+                    list15.append(username)
+                elif x > 215 and x < 225:
+                    list15.append(username)
+                elif x > 224 and x < 240:
+                    list16.append(username)
+                elif x > 239 and x < 255:
+                    list17.append(username)
+                elif x > 254 and x < 270:
+                    list18.append(username)
+
+
+        elif text.startswith('D '):
+                pla = text[2:]
+                donename = pla.lower()
+                if '\n' in donename:
+                    reply('D @username with separate posts: ' + donename)
+                elif 'with @' in donename:
+                    reply('D your @username first the reply with \'Engaged with @otherusername\'')
+                elif ' engaged ' in donename:
+                    reply('D your @username first the reply with \'Engaged with @otherusername\'')
+                s = mainlist
+                if donename in s:
+                    mainlist.remove(donename)
+                mn = fromlist
+                tele = '@' + us_id 
+                if tele in mn:
+                    fromlist.remove(tele)
+
+        elif 'whatptime' in text:
+            reply('look at the corner of your screen!')
+        else:
+            if getEnabled(chat_id):
+                c = 5
+            else:
+                logging.info('not enabled for chat_id {}'.format(chat_id))
+
+
+app = webapp2.WSGIApplication([
+    ('/me', MeHandler),
+    ('/updates', GetUpdatesHandler),
+    ('/set_webhook', SetWebhookHandler),
+    ('/webhook', WebhookHandler),
+    ('/auto_list', autolist),
+    ('/auto_end', end),
+    ('/auto_leech', leech),
+    ('/auto_onehour', onehour),
+    ('/auto_forty', forty),
+    ('/auto_clearbl', clearbl),
+    ('/auto_keepdropping',keepdropping),
+    ('/auto_start', autostart)
+], debug=True)
